@@ -1,0 +1,72 @@
+<div class="bckground">
+    <div class="placecard">
+        <mat-card>
+            <mat-card-title class="title">{{place.name}}</mat-card-title>
+            <mat-card-content>
+                <div>
+                    <div class="subtitle">Address: </div>
+                    <div class="basictext">{{place.address}}</div>
+                </div>
+                <div>
+                    <p class="subtitle">Opening hours:</p>
+
+                    <div fxLayout="row" class="workday basictext">
+                        <div fxFlex="50%">
+                            <p>monday: </p>
+                        </div>
+                        <div fxFlex="50%">
+                            <div *ngFor="let block of place.openingHours.days.monday">
+                                {{ block.start }} - {{ block.end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" class="workday basictext">
+                        <div fxFlex="50%">
+                            <p>tuesday: </p>
+                        </div>
+                        <div fxFlex="50%">
+                            <div *ngFor="let block of place.openingHours.days.tuesday">
+                                {{ block.start }} - {{ block.end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" class="workday basictext">
+                        <div fxFlex="50%">
+                            <p>wednesday: </p>
+                        </div>
+                        <div fxFlex="50%">
+                            <div *ngFor="let block of place.openingHours.days.wednesday">
+                                {{ block.start }} - {{ block.end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" class="workday basictext">
+                        <div fxFlex="50%">
+                            <p>thursday: </p>
+                        </div>
+                        <div fxFlex="50%">
+                            <div *ngFor="let block of place.openingHours.days.thursday">
+                                {{ block.start }} - {{ block.end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" class="workday basictext">
+                        <div fxFlex="50%">
+                            <p>friday: </p>
+                        </div>
+                        <div fxFlex="50%">
+                            <div *ngFor="let block of place.openingHours.days.friday">
+                                {{ block.start }} - {{ block.end }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
