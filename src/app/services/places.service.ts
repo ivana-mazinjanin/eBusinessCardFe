@@ -5,17 +5,14 @@ import { Observable, map } from 'rxjs';
 const E_BUSINESS_CARD_API = 'http://localhost:8080';
 
 export interface Place {
-  name: string
-  address: string
-  openingHours: {
-    days: {
-      monday: WorkingBlock[];
-      tuesday: WorkingBlock[];
-      wednesday: WorkingBlock[];
-      thursday: WorkingBlock[];
-      friday: WorkingBlock[];
-    };
-  }
+  name: string;
+  address: string;
+  openingHours: OpeningHours[];
+}
+
+export interface OpeningHours {
+  days:          string,
+	workingBlocks: WorkingBlock[]
 }
 
 export interface WorkingBlock {

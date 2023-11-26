@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Place, PlacesService, WorkingBlock } from '../services/places.service';
+import { OpeningHours, Place, PlacesService, WorkingBlock } from '../services/places.service';
 
 @Component({
   selector: 'app-place-details',
@@ -17,16 +17,7 @@ export class PlaceDetailsComponent implements OnInit {
   place: Place = {
     name: "",
     address: "",
-    openingHours: {
-      days: {
-        monday: [],
-        tuesday: [],
-        wednesday: [],
-        thursday: [],
-        friday: [],
-      }
-    }
-    
+    openingHours: []
   }
 
   placeId: string = "";
@@ -48,40 +39,31 @@ export class PlaceDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.placeId = params['placeId'];
 
-
-
       if (this.placeId != "") {
-        console.log(this.placeId)
         this.placesService.getPlaceDetails(this.placeId).subscribe({
           next: data => {
-            console.log(data)
-            // console.log(data.opening_hours.days["monday"])
+            this.place.name =  data.name
+            this.place.address = data.address
+            this.place.openingHours = new Array(data.openingHours.size)
 
-        
-            console.log("***")
-           
-            // this.place.name = data.displayed_what
-            // this.place.address = data.displayed_where
-            // this.place.openingHours.days = this.jsonToMap(this.place.openingHours.days)
+            console.log(data.openingHours)
+            console.log(data.openingHours.length)
 
-            // let tmp = this.jsonToMap(this.place.openingHours.days)
-            // console.log(typeof(this.place.openingHours.days))
-            // console.log(tmp.get("monday"))
 
-            this.place = {
-              name: data.displayed_what,
-              address: data.displayed_where,
-              openingHours: {
-                days: {
-                  monday: data.opening_hours.days.monday,
-                  tuesday: data.opening_hours.days.tuesday,
-                  wednesday: data.opening_hours.days.wednesday,
-                  thursday: data.opening_hours.days.thursday,
-                  friday: data.opening_hours.days.friday,
-                }
+            for (let i = 0; i< data.openingHours.length ; i++) {
+
+              console.log("***")
+              console.log(data.openingHours[i].Days)
+              
+              let entry: OpeningHours= {
+                days: this.daysToStr(data.openingHours[i].Days),
+                workingBlocks: data.openingHours[i].WorkingBlocks,
               }
-          
-          }
+              this.place.openingHours[i] = entry
+            }
+
+           
+            console.log(this.place)
         },
           error: err => {
             console.log("getPlaceDetails called and failed")
@@ -93,4 +75,30 @@ export class PlaceDetailsComponent implements OnInit {
     });
   }
 
+
+  daysToStr(days: string[]) {
+    let out = ""
+
+    if (days != null && days.length != 0) {
+      out = days[0]
+  
+      if (days.length == 2) {
+        out += ", " + days[1]
+      }
+      if (days.length > 2) {
+        out += " - " + days[days.length - 1]
+      }
+    }
+  
+    return out 
+  }
+
+  dataAvailable() {
+    if (this.place.name == "") {
+      return false 
+    }
+
+    return true 
+  }
+  
 }

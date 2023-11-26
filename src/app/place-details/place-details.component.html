@@ -3,69 +3,34 @@
         <mat-card>
             <mat-card-title class="title">{{place.name}}</mat-card-title>
             <mat-card-content>
-                <div>
-                    <div class="subtitle">Address: </div>
-                    <div class="basictext">{{place.address}}</div>
-                </div>
-                <div>
-                    <p class="subtitle">Opening hours:</p>
-
-                    <div fxLayout="row" class="workday basictext">
-                        <div fxFlex="50%">
-                            <p>monday: </p>
-                        </div>
-                        <div fxFlex="50%">
-                            <div *ngFor="let block of place.openingHours.days.monday">
-                                {{ block.start }} - {{ block.end }}
-                            </div>
-                        </div>
+                <div *ngIf="dataAvailable()">
+                    <div>
+                        <div class="subtitle">Address: </div>
+                        <div class="basictext">{{place.address}}</div>
                     </div>
+                    <div>
+                        <div class="subtitle">Opening hours:</div>
 
-                    <div fxLayout="row" class="workday basictext">
-                        <div fxFlex="50%">
-                            <p>tuesday: </p>
-                        </div>
-                        <div fxFlex="50%">
-                            <div *ngFor="let block of place.openingHours.days.tuesday">
-                                {{ block.start }} - {{ block.end }}
+                        <div *ngFor="let dayData of place.openingHours" fxLayout="row" class="workday basictext">
+                            <div fxFlex="50%">
+                                <p>{{dayData.days}}: </p>
                             </div>
-                        </div>
-                    </div>
+                            <div fxFlex="50%">
+                                <div *ngFor="let block of dayData.workingBlocks">
+                                    {{ block.start }} - {{ block.end }}
+                                </div>
 
-                    <div fxLayout="row" class="workday basictext">
-                        <div fxFlex="50%">
-                            <p>wednesday: </p>
-                        </div>
-                        <div fxFlex="50%">
-                            <div *ngFor="let block of place.openingHours.days.wednesday">
-                                {{ block.start }} - {{ block.end }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxLayout="row" class="workday basictext">
-                        <div fxFlex="50%">
-                            <p>thursday: </p>
-                        </div>
-                        <div fxFlex="50%">
-                            <div *ngFor="let block of place.openingHours.days.thursday">
-                                {{ block.start }} - {{ block.end }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxLayout="row" class="workday basictext">
-                        <div fxFlex="50%">
-                            <p>friday: </p>
-                        </div>
-                        <div fxFlex="50%">
-                            <div *ngFor="let block of place.openingHours.days.friday">
-                                {{ block.start }} - {{ block.end }}
+                                <div *ngIf="dayData.workingBlocks == null">
+                                    closed
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div *ngIf="!dataAvailable()">
+                    No data available for place with id: {{placeId}}
+                </div> 
             </mat-card-content>
         </mat-card>
     </div>
