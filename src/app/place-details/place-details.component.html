@@ -10,7 +10,10 @@
                     </div>
 
                     <div style="padding-top: 3%;">
-                        <div *ngIf="place.isOpen" class="openText">Currently opened...</div>
+                        <div *ngIf="place.isOpen" class="openText">
+                            <div>Currently opened...</div>
+                            <div>Closing at {{place.nextChange}}</div>
+                        </div>
                         <div *ngIf="!place.isOpen" class="closedText">Currently closed...</div>
                     </div>
 

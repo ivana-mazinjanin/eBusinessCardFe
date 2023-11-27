@@ -18,6 +18,7 @@ export class PlaceDetailsComponent implements OnInit {
     name: "",
     address: "",
     isOpen: false, 
+    nextChange: "",
     openingHours: []
   }
 
@@ -46,6 +47,7 @@ export class PlaceDetailsComponent implements OnInit {
             this.place.name =  data.name
             this.place.address = data.address
             this.place.isOpen = data.isOpen
+            this.place.nextChange =  data.nextChange
             this.place.openingHours = new Array(data.openingHours.size)
 
             for (let i = 0; i< data.openingHours.length ; i++) {

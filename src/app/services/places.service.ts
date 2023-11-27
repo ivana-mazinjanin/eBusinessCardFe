@@ -8,6 +8,7 @@ export interface Place {
   name: string;
   address: string;
   isOpen: boolean;
+  nextChange: string; 
   openingHours: OpeningHours[];
 }
 
