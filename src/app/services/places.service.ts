@@ -7,6 +7,7 @@ const E_BUSINESS_CARD_API = 'http://localhost:8080';
 export interface Place {
   name: string;
   address: string;
+  isOpen: boolean;
   openingHours: OpeningHours[];
 }
 

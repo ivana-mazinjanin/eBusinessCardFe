@@ -17,6 +17,7 @@ export class PlaceDetailsComponent implements OnInit {
   place: Place = {
     name: "",
     address: "",
+    isOpen: false, 
     openingHours: []
   }
 
@@ -44,33 +45,22 @@ export class PlaceDetailsComponent implements OnInit {
           next: data => {
             this.place.name =  data.name
             this.place.address = data.address
+            this.place.isOpen = data.isOpen
             this.place.openingHours = new Array(data.openingHours.size)
 
-            console.log(data.openingHours)
-            console.log(data.openingHours.length)
-
-
             for (let i = 0; i< data.openingHours.length ; i++) {
-
-              console.log("***")
-              console.log(data.openingHours[i].Days)
-              
               let entry: OpeningHours= {
                 days: this.daysToStr(data.openingHours[i].Days),
                 workingBlocks: data.openingHours[i].WorkingBlocks,
               }
               this.place.openingHours[i] = entry
             }
-
-           
-            console.log(this.place)
         },
           error: err => {
             console.log("getPlaceDetails called and failed")
           }
         })
       }
-
 
     });
   }

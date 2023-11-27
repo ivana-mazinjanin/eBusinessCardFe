@@ -8,6 +8,12 @@
                         <div class="subtitle">Address: </div>
                         <div class="basictext">{{place.address}}</div>
                     </div>
+
+                    <div style="padding-top: 3%;">
+                        <div *ngIf="place.isOpen" class="openText">Currently opened...</div>
+                        <div *ngIf="!place.isOpen" class="closedText">Currently closed...</div>
+                    </div>
+
                     <div>
                         <div class="subtitle">Opening hours:</div>
 

@@ -30,3 +30,11 @@
 .basictext {
     color: gray;
 }
+
+.openText {
+    color: rgb(50, 121, 50);
+}
+
+.closedText {
+    color: rgb(221, 39, 39);
+}
