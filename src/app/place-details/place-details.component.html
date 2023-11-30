@@ -14,7 +14,10 @@
                             <div>Currently opened...</div>
                             <div>Closing at {{place.nextChange}}</div>
                         </div>
-                        <div *ngIf="!place.isOpen" class="closedText">Currently closed...</div>
+                        <div *ngIf="!place.isOpen" class="closedText">
+                            <div>Currently closed...</div>
+                            <div>Opening at {{place.nextChange}}</div>
+                        </div>
                     </div>
 
                     <div>
