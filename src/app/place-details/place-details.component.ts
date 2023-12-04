@@ -92,5 +92,12 @@ export class PlaceDetailsComponent implements OnInit {
 
     return true 
   }
+
+  isDropdownOpen = false;
+
+  openDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+
+  }
   
 }

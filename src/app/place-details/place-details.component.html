@@ -10,39 +10,49 @@
                     </div>
 
                     <div style="padding-top: 3%;">
-                        <div *ngIf="place.isOpen" class="openText">
-                            <div>Currently opened...</div>
-                            <div>Closing at {{place.nextChange}}</div>
+                        <div *ngIf="place.isOpen">
+                            <p class="openText">Currently opened...</p>
+                            <p class="basictext">Closing at {{place.nextChange}}</p>
                         </div>
-                        <div *ngIf="!place.isOpen" class="closedText">
-                            <div>Currently closed...</div>
-                            <div>Opening at {{place.nextChange}}</div>
+                        <div *ngIf="!place.isOpen">
+                            <p class="closedText">Currently closed...</p>
+                            <p class="basictext">Opening at {{place.nextChange}}</p>
                         </div>
                     </div>
 
                     <div>
-                        <div class="subtitle">Opening hours:</div>
-
-                        <div *ngFor="let dayData of place.openingHours" fxLayout="row" class="workday basictext">
-                            <div fxFlex="50%">
-                                <p>{{dayData.days}}: </p>
-                            </div>
-                            <div fxFlex="50%">
-                                <div *ngFor="let block of dayData.workingBlocks">
-                                    {{ block.start }} - {{ block.end }}
-                                </div>
-
-                                <div *ngIf="dayData.workingBlocks == null">
-                                    closed
-                                </div>
+                        <div fxLayout="row">
+                            <div class="subtitle">Opening hours:</div>
+                            <div>
+                                <button class="icon-container" mat-icon-button (click)="openDropdown()">
+                                    <mat-icon *ngIf="!isDropdownOpen">expand_more</mat-icon>
+                                    <mat-icon *ngIf="isDropdownOpen">expand_less</mat-icon>
+                                </button>
                             </div>
                         </div>
+
+                        <span *ngIf="isDropdownOpen">
+                            <div *ngFor="let dayData of place.openingHours" fxLayout="row" class="workday basictext">
+                                <div fxFlex="50%">
+                                    <p>{{dayData.days}}: </p>
+                                </div>
+                                <div fxFlex="50%">
+                                    <div *ngFor="let block of dayData.workingBlocks">
+                                        {{ block.start }} - {{ block.end }}
+                                    </div>
+
+                                    <div *ngIf="dayData.workingBlocks == null">
+                                        closed
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
                     </div>
                 </div>
 
                 <div *ngIf="!dataAvailable()">
                     No data available for place with id: {{placeId}}
-                </div> 
+                </div>
             </mat-card-content>
         </mat-card>
     </div>

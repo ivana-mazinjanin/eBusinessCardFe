@@ -9,6 +9,8 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button'
 
 
 
@@ -23,7 +25,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
